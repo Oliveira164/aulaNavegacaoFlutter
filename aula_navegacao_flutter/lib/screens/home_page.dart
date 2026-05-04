@@ -1,12 +1,25 @@
 import 'package:flutter/material.dart';
+import './perfil_page.dart';
+import './cardapio_page.dart';
 
-class HomePage extends StatelessWidget{
-  const HomePage({super.key});
+class HomePage extends StatefulWidget{
+  @override
+  _HomePageState createState() => _HomePageState();
+}
+
+class _HomePageState extends State<HomePage>{
+  int indiceAtual=0;
+
+    final List<Widget> telas = [
+      HomeContent(),
+      PerfilPage(),
+      CardapioPage()
+    ];
 
   @override
   Widget build(BuildContext context){
     return Scaffold(
-      appBar : AppBar(title: Text('tela inicial')),
+      appBar : AppBar(title: Text('Tela Inicial')),
       drawer: Drawer(
         child: ListView(
           padding: EdgeInsets.zero,
@@ -20,13 +33,41 @@ class HomePage extends StatelessWidget{
               onTap: (){Navigator.pop(context);},
             ),
             ListTile(
-              title: Text('perfil'),
+              title: Text('Perfil'),
               onTap: (){Navigator.pushNamed(context, '/perfil');}
+            ),
+            ListTile(
+              title: Text('Cardápio'),
+              onTap: (){Navigator.pushNamed(context, '/cardapio');}
             )
           ],
         ),
       ),
-      body: Center(
+      body: telas[indiceAtual],
+      bottomNavigationBar: BottomNavigationBar(
+        currentIndex: indiceAtual,
+        onTap: (index){
+          setState(() {
+            indiceAtual = index;
+          });
+        },
+        items: [
+          BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'),
+          BottomNavigationBarItem(icon: Icon(Icons.person), label: 'Perfil'),
+          BottomNavigationBarItem(icon: Icon(Icons.food_bank), label: 'Cardápio'),
+        ],
+      ),
+    );
+  }
+}
+
+
+class HomeContent extends StatelessWidget{
+  const HomeContent({super.key});
+
+  @override
+  Widget build(BuildContext context){
+    return Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.center,
@@ -38,10 +79,14 @@ class HomePage extends StatelessWidget{
             ElevatedButton(
               onPressed: (){Navigator.pushNamed(context, '/perfil');},
               child: Text ('Acessar o Perfil')
+            ),
+            SizedBox(height: 20),
+            ElevatedButton(
+              onPressed: (){Navigator.pushNamed(context, '/cardapio');},
+              child: Text ('Acessar o Cardápio')
             )
           ],
         ),
-      )
-    );
+      );
   }
 }

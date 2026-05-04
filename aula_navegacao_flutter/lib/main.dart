@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import './screens/home_page.dart';
 import './screens/perfil_page.dart';
+import './screens/cardapio_page.dart';
 
 void main() {
   runApp(const MainApp());
@@ -15,8 +16,9 @@ class MainApp extends StatelessWidget{
       debugShowCheckedModeBanner: false,
       initialRoute: '/',
       routes: {
-        '/': (context)=> const HomePage(),
-        '/perfil': (context)=> const PerfilPage()
+        '/': (context)=>  HomePage(),
+        '/perfil': (context)=>  PerfilPage(),
+        '/cardapio': (context)=> CardapioPage()
       },
     );
   }

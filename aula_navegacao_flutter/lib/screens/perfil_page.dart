@@ -17,7 +17,7 @@ class PerfilPage extends StatelessWidget{
             Text('Conteúdo do corpo da tela do perfil'),
             SizedBox(height: 20,),
             ElevatedButton(
-              onPressed: (){Navigator.pop(context);}, 
+              onPressed: (){Navigator.pushNamed(context, '/');}, 
               child: Text('Acessar a tela inicial')
               )
           ],
